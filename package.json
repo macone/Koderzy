@@ -1,0 +1,22 @@
+{
+  "name": "milionerzy",
+  "version": "1.0.0",
+  "description": "Game build too test skills in node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macone/Milionerzy.git"
+  },
+  "author": "Mac Lukasiak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/macone/Milionerzy/issues"
+  },
+  "homepage": "https://github.com/macone/Milionerzy#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
