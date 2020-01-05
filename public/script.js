@@ -38,6 +38,11 @@ function sendAnswer(answerIndex) {
 		.then(r => r.json())
 		.then(data => {
 			handleAnswerFeedback(data);
+			for (const button of buttons) {
+				button.disabled = false
+			};
+
+			tipDiv.innerText = ""
 		})
 }
 
@@ -94,5 +99,28 @@ function halfOnHalf() {
 			handleHalfOnHalfAnswer(data)
 		})
 }
-
 document.querySelector('#halfOnHalf').addEventListener('click', halfOnHalf)
+
+
+
+function handleCrowdAnswer(data) {
+	if (typeof data.text === 'string') {
+		tipDiv.innerText = data.text;
+	} else {
+		data.chart.forEach((percent, index) => {
+			buttons[index].innerText = `${buttons[index].innerText} : ${percent}%`
+		})
+	}
+}
+
+function questionToTheCrowd() {
+	fetch('/help/crowd', {
+		method: 'GET',
+	})
+		.then(r => r.json())
+		.then(data => {
+
+			handleCrowdAnswer(data)
+		})
+}
+document.querySelector('#questionToTheCrowd').addEventListener('click', questionToTheCrowd)
