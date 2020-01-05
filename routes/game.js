@@ -92,6 +92,28 @@ function gameRoutes(app) {
 			text: doesFriendKnowAnswer ? `Hmm, wydaje mi się, że odpowiedź to ${question.answers[question.correctAnswer]}` : 'Hmm, no nie wiem...'
 		})
 	})
+
+	app.get('/help/half', (req, res) => {
+		if (halfOnHalfUsed) {
+			return res.json({
+				text: 'to koło ratunkowe było już wykorzystane.'
+			})
+		}
+
+		const question = questions[goodAnswers]
+
+		halfOnHalfUsed = true;
+
+		const answersCopy = question.answers.filter((s, index) => (
+			index !== question.correctAnswer
+		))
+
+		answersCopy.splice(~~(Math.random() * answersCopy.length), 1)
+
+		res.json({
+			answersToRemove: answersCopy
+		})
+	})
 }
 
 module.exports = gameRoutes;

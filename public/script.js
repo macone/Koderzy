@@ -70,5 +70,29 @@ function callToAFriend() {
 			handleFriendsAnswer(data)
 		})
 }
-
 document.querySelector('#callToAFriend').addEventListener('click', callToAFriend)
+
+function handleHalfOnHalfAnswer(data) {
+	if (typeof data.text === 'string') {
+		tipDiv.innerText = data.text;
+	} else {
+		for (const button of buttons) {
+			if (data.answersToRemove.indexOf(button.innerText) > -1) {
+				button.disabled = true;
+			}
+		}
+	}
+}
+
+function halfOnHalf() {
+	fetch('/help/half', {
+		method: 'GET',
+	})
+		.then(r => r.json())
+		.then(data => {
+
+			handleHalfOnHalfAnswer(data)
+		})
+}
+
+document.querySelector('#halfOnHalf').addEventListener('click', halfOnHalf)
